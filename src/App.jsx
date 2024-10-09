@@ -1,13 +1,14 @@
 import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import "./App.css";
-import { useState } from "react";
+// import { useState } from "react";
 import ColorForm from "./Components/ColorForm/ColorForm";
+import useLocalStorageState from "use-local-storage-state";
 
 
 function App() {
   // State to keep track of all colors
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("colors", {defaultValue: initialColors});
 
   // Function to handle adding a new color to the list
   function handleAddColor(newColor) {

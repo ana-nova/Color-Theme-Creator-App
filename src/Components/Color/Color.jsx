@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
+//import useLocalStorageState from "use-local-storage-state";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
   function handleDelete() {
@@ -15,6 +16,8 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
   }
 
   const [edit, setEdit] = useState(false);
+  //const [edit, setEdit] = useLocalStorageState("editMode", false);
+
 
   function handleEdit() {
     setEdit(!edit);
