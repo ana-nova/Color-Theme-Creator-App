@@ -22,10 +22,11 @@ function App() {
   }
 
   function handleEditColor(colorId, updatedColors) {
-    setColors((prev) => {
-      const editColor = prev.map((color) => color.id === colorId ? {...color, ...updatedColors} : color )
-      return editColor;
-    });
+    // setColors((prev) => {
+    //   const editColor = prev.map((color) => color.id === colorId ? {...color, ...updatedColors} : color )
+    //   return editColor;
+    // });
+    setColors((prev) => prev.map((color) => color.id === colorId ? {...color, ...updatedColors} : color));
   }
 
   return (

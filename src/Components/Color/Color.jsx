@@ -34,7 +34,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       }}
     >
       {edit ? (
-        <ColorForm onSubmitColor={handleUpdateColor} initialData={color}/>
+        <ColorForm onSubmitColor={handleUpdateColor} isEditing={edit} initialColor={color}/>
       ) : (
       <>
         <h3 className="color-card-headlight">{color.role}</h3>

@@ -3,14 +3,15 @@ import ColorInput from "../ColorInput/ColorInput";
 import { uid } from "uid";
 import "./ColorForm.css";
 
-export default function ColorForm({ onSubmitColor }) {
-  const [role, setRole] = useState("primary");
-  const [hex, setHex] = useState("#000000");
-  const [contrastText, setContrastText] = useState("#ffffff");
+export default function ColorForm({ onSubmitColor, isEditing, 
+  initialColor={role: "primary", hex: "#ffffff", contrastText: "#000000"} }) {
+
+  const [role, setRole] = useState(initialColor.role);
+  const [hex, setHex] = useState(initialColor.hex);
+  const [contrastText, setContrastText] = useState(initialColor.contrastText);
 
   function handleSubmit(event) {
     event.preventDefault();
-    event.stopPropagation();
     const newColor = {
       id: uid(),
       role,
@@ -63,7 +64,7 @@ export default function ColorForm({ onSubmitColor }) {
         />
       </label>
 
-      <button type="submit">add your color</button>
+      <button type="submit">{isEditing ? "update your color" : "add your color"}</button>
     </form>
   );
 }
