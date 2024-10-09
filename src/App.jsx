@@ -21,13 +21,20 @@ function App() {
     });
   }
 
+  function handleEditColor(colorId, updatedColors) {
+    setColors((prev) => {
+      const editColor = prev.map((color) => color.id === colorId ? {...color, ...updatedColors} : color )
+      return editColor;
+    });
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitColor={handleAddColor} />
       {colors.length > 0 ? (
         colors.map((color) => (
-          <Color key={color.id} color={color} onDeleteColor={handleDeleteColor} />
+          <Color key={color.id} color={color} onDeleteColor={handleDeleteColor} onUpdateColor={handleEditColor}/>
         ))
       ) : (
         <p className="color-card-highlight">
