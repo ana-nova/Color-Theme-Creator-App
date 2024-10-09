@@ -11,16 +11,29 @@ function App() {
 
   // Function to handle adding a new color to the list
   function handleAddColor(newColor) {
-    setColors((prev) => ([newColor, ...prev]));
+    setColors((prev) => ([ newColor, ...prev]));
+  }
+
+  function handleDeleteColor(colorId) {
+    setColors((prev) => {
+      const updatedColors = prev.filter((color) => color.id != colorId);
+      return updatedColors;
+    });
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitColor={handleAddColor} />
-      {colors.map((color) => {
-        return <Color key={color.id} color={color} />;
-      })}
+      {colors.length > 0 ? (
+        colors.map((color) => (
+          <Color key={color.id} color={color} onDeleteColor={handleDeleteColor} />
+        ))
+      ) : (
+        <p className="color-card-highlight">
+          No colors left in the theme! Please add new colors to get started.
+        </p>
+      )}
     </>
   );
 }
