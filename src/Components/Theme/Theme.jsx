@@ -1,11 +1,16 @@
 import { useState } from "react";
 
-export default function Theme({ themes, setThemes, selectedThemeId, setSelectedThemeId }) {
+export default function Theme({
+  themes,
+  setThemes,
+  selectedThemeId,
+  setSelectedThemeId,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [themeInput, setThemeInput] = useState("");
 
-  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId); 
+  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId);
 
   const handleThemeSelectChange = (event) => {
     setSelectedThemeId(event.target.value);
@@ -13,14 +18,14 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
 
   const handleAddTheme = () => {
     setIsAdding(true);
-    setThemeInput(""); 
+    setThemeInput("");
   };
 
   const handleEditTheme = () => {
     if (selectedThemeId === "t1") return;
     const currentTheme = themes.find((theme) => theme.id === selectedThemeId);
     setIsEditing(true);
-    setThemeInput(currentTheme.name); 
+    setThemeInput(currentTheme.name);
   };
 
   const handleInputChange = (event) => {
@@ -54,9 +59,11 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
   };
 
   const handleDeleteTheme = (theme) => {
-    if (selectedThemeId === "t1") return; 
+    if (selectedThemeId === "t1") return;
 
-    const confirmed = window.confirm(`Are you sure you want to delete this ${theme.name}?`);
+    const confirmed = window.confirm(
+      `Are you sure you want to delete this ${theme.name}?`
+    );
     if (confirmed) {
       setThemes(themes.filter((theme) => theme.id !== selectedThemeId));
       setSelectedThemeId("t1");
@@ -71,7 +78,9 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
             type="text"
             value={themeInput}
             onChange={handleInputChange}
-            placeholder={isAdding ? "Enter new theme name" : "Edit ccurent theme name"}
+            placeholder={
+              isAdding ? "Enter new theme name" : "Edit ccurent theme name"
+            }
           />
           <button onClick={handleSaveTheme}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
@@ -89,7 +98,10 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
           <button onClick={handleEditTheme} disabled={selectedThemeId === "t1"}>
             edit theme
           </button>
-          <button onClick={() => handleDeleteTheme(themeToDelete)} disabled={selectedThemeId === "t1"}>
+          <button
+            onClick={() => handleDeleteTheme(themeToDelete)}
+            disabled={selectedThemeId === "t1"}
+          >
             delete theme
           </button>
         </>
@@ -97,4 +109,3 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
     </div>
   );
 }
-

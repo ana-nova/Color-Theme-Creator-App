@@ -2,29 +2,32 @@ import { useEffect, useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [edit, setEdit] = useState(false);
   const [contrastScore, setContrastScore] = useState(null);
 
-
   useEffect(() => {
-  async function fetchContrastScore() {
-    try {
-      const response = await fetch("https://www.aremycolorsaccessible.com/api/are-they", {
-        mode: 'cors',
-        method: "POST",
-        body: JSON.stringify({ colors: [color.hex, color.contrastText] })
-      });
+    async function fetchContrastScore() {
+      try {
+        const response = await fetch(
+          "https://www.aremycolorsaccessible.com/api/are-they",
+          {
+            mode: "cors",
+            method: "POST",
+            body: JSON.stringify({ colors: [color.hex, color.contrastText] }),
+          }
+        );
 
-      const data = await response.json();
-      setContrastScore(data.overall); 
-    } catch (error) {
-      console.error("Error fetching contrast score:", error);
+        const data = await response.json();
+        setContrastScore(data.overall);
+      } catch (error) {
+        console.error("Error fetching contrast score:", error);
+      }
     }
-  }
     fetchContrastScore();
-}, [color])
+  }, [color]);
 
   function handleDelete() {
     const userConfirmed = window.confirm(
@@ -32,18 +35,17 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
     );
 
     if (userConfirmed) {
-      onDeleteColor(color.id); 
+      onDeleteColor(color.id);
     }
   }
-
 
   function handleEdit() {
     setEdit(!edit);
   }
 
   function handleUpdateColor(updatedColor) {
-    onUpdateColor(color.id, updatedColor); 
-    setEdit(false); 
+    onUpdateColor(color.id, updatedColor);
+    setEdit(false);
   }
 
   return (
@@ -55,25 +57,34 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       }}
     >
       {edit ? (
-        <ColorForm onSubmitColor={handleUpdateColor} isEditing={edit} initialColor={color}/>
+        <ColorForm
+          onSubmitColor={handleUpdateColor}
+          isEditing={edit}
+          initialColor={color}
+        />
       ) : (
-      <>
-        <CopyToClipboard hexCode={color.hex} />
-        <h3 className="color-card-headlight">{color.role}</h3>
-        <p>hex: {color.hex}</p>
-        <p>contrast: {color.contrastText}</p>
-        <p>
-            Accessibility Score:{" "}
-            {contrastScore ? contrastScore : "Loading..."}
+        <>
+          <CopyToClipboard hexCode={color.hex} />
+          <h3 className="color-card-headlight">{color.role}</h3>
+          <p>hex: {color.hex}</p>
+          <p>contrast: {color.contrastText}</p>
+          <p>
+            Accessibility Score: {contrastScore ? contrastScore : "Loading..."}
           </p>
-        <button onClick={handleDelete}>delete</button>
-        <button onClick={handleEdit}>edit</button>
-      </>
+
+          <ButtonGroup gap="2">
+            <Button colorScheme="blackAlpha" size="xs" onClick={handleDelete}>
+              delete
+            </Button>
+            <Button colorScheme="blackAlpha" size="xs" onClick={handleEdit}>
+              edit
+            </Button>
+          </ButtonGroup>
+        </>
       )}
     </div>
   );
 }
-
 
 /*
     The ) : ( syntax is part of a ternary operator that helps you choose between 
