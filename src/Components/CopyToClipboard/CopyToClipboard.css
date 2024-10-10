@@ -1,0 +1,7 @@
+.confirmation-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+ /*  color: green !important;   // Force the message text to always be green */

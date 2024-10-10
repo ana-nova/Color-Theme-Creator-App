@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 //import useLocalStorageState from "use-local-storage-state";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
@@ -45,6 +46,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         <p>contrast: {color.contrastText}</p>
         <button onClick={handleDelete}>delete</button>
         <button onClick={handleEdit}>edit</button>
+        <CopyToClipboard hexCode={color.hex} />
       </>
       )}
     </div>
