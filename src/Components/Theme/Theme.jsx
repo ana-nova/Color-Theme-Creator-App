@@ -5,7 +5,7 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
   const [isAdding, setIsAdding] = useState(false);
   const [themeInput, setThemeInput] = useState("");
 
-  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId); //for return section: when i delete i see what theme i am deleting
+  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId); 
 
   const handleThemeSelectChange = (event) => {
     setSelectedThemeId(event.target.value);
@@ -13,14 +13,14 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
 
   const handleAddTheme = () => {
     setIsAdding(true);
-    setThemeInput(""); // Clear input for new theme
+    setThemeInput(""); 
   };
 
   const handleEditTheme = () => {
-    if (selectedThemeId === "t1") return; // Prevent editing Default Theme
+    if (selectedThemeId === "t1") return;
     const currentTheme = themes.find((theme) => theme.id === selectedThemeId);
     setIsEditing(true);
-    setThemeInput(currentTheme.name); // Set input to the current theme's name
+    setThemeInput(currentTheme.name); 
   };
 
   const handleInputChange = (event) => {
@@ -54,12 +54,12 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
   };
 
   const handleDeleteTheme = (theme) => {
-    if (selectedThemeId === "t1") return; // Do not allow deleting the Default Theme
+    if (selectedThemeId === "t1") return; 
 
     const confirmed = window.confirm(`Are you sure you want to delete this ${theme.name}?`);
     if (confirmed) {
       setThemes(themes.filter((theme) => theme.id !== selectedThemeId));
-      setSelectedThemeId("t1"); // Switch to Default Theme after deletion
+      setSelectedThemeId("t1");
     }
   };
 

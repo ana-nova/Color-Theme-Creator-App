@@ -1,13 +1,4 @@
-// export const initialColors = [
-//     { id: "c1", role: "Primary", hex: "#ff0000", contrastText: "#ffffff" },
-//     { id: "c2", role: "Secondary", hex: "#00ff00", contrastText: "#000000" },
-//   ];
-  
-
-
-
 export const initialColors = [
-  // Ocean Colors
   { id: "1", role: "Deep Ocean", hex: "#013A63", contrastText: "#FFFFFF" },
   { id: "2", role: "Ocean Wave", hex: "#0277BD", contrastText: "#FFFFFF" },
   { id: "3", role: "Seafoam", hex: "#88D8B0", contrastText: "#000000" },
@@ -17,7 +8,6 @@ export const initialColors = [
   { id: "7", role: "Twilight Surf", hex: "#004D73", contrastText: "#FFFFFF" },
   { id: "8", role: "Sunset Glow", hex: "#FFA726", contrastText: "#000000" },
 
-  // Forest Colors
   { id: "9", role: "Evergreen", hex: "#054A29", contrastText: "#FFFFFF" },
   { id: "10", role: "Pine Needle", hex: "#4E8542", contrastText: "#FFFFFF" },
   { id: "11", role: "Moss Green", hex: "#8A9A5B", contrastText: "#000000" },

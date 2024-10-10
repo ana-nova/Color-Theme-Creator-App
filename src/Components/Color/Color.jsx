@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
-//import useLocalStorageState from "use-local-storage-state";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [edit, setEdit] = useState(false);
@@ -28,7 +27,6 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
 }, [color])
 
   function handleDelete() {
-    // Show a confirmation dialog before deleting
     const userConfirmed = window.confirm(
       `Are you sure you want to delete the color "${color.role}"?`
     );
@@ -44,8 +42,8 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
   }
 
   function handleUpdateColor(updatedColor) {
-    onUpdateColor(color.id, updatedColor); // Update the color in the main list
-    setEdit(false); // Exit edit mode after updating
+    onUpdateColor(color.id, updatedColor); 
+    setEdit(false); 
   }
 
   return (

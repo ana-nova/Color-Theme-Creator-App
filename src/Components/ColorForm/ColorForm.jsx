@@ -19,8 +19,8 @@ export default function ColorForm({ onSubmitColor, isEditing,
       contrastText,
     };
 
-    onSubmitColor(newColor); // Pass the new color to the parent component
-    resetForm(); // Reset the form to default values after submission
+    onSubmitColor(newColor); 
+    resetForm(); 
   }
 
   function resetForm() {

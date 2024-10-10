@@ -1,11 +1,9 @@
 export default function ColorInput({ id, inputValue, onChange }) {
   function handleInputValue(event) {
     const newValue = event.target.value;
-    
-    onChange(newValue); // Directly pass the new value to the parent component
-
+    onChange(newValue); 
   }
-
+  
   return (
     <>
       <input

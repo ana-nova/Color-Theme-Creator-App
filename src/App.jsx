@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useLocalStorageState from "use-local-storage-state"; // Ensure you have this package installed
+import useLocalStorageState from "use-local-storage-state"; 
 import { initialThemes } from "./lib/InitialThemes";
 import { initialColors } from "./lib/InitialColors";
 import ColorForm from "./Components/ColorForm/ColorForm";
@@ -10,11 +10,11 @@ import Theme from "./Components/Theme/Theme";
 function App() {
   const [themes, setThemes] = useLocalStorageState("themes", { defaultValue: initialThemes });
   const [colors, setColors] = useLocalStorageState("colors", { defaultValue: initialColors });
-  const [selectedThemeId, setSelectedThemeId] = useState("t1"); // Default to the Default Theme
+  const [selectedThemeId, setSelectedThemeId] = useState("t1"); 
 
 
   const handleAddColor = (newColor) => {
-    setColors((prevColors) => [...prevColors, newColor]); // Add new color to the color list
+    setColors((prevColors) => [...prevColors, newColor]); 
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === selectedThemeId
@@ -25,7 +25,7 @@ function App() {
   };
 
   const handleDeleteColor = (colorId) => {
-    setColors((prevColors) => prevColors.filter((color) => color.id !== colorId)); // Remove color from colors list
+    setColors((prevColors) => prevColors.filter((color) => color.id !== colorId)); 
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === selectedThemeId
@@ -54,13 +54,11 @@ function App() {
   const selectedTheme = themes.find((theme) => theme.id === selectedThemeId);
   const colorsToShow = selectedTheme.colors
     .map((colorId) => colors.find((color) => color.id === colorId))
-    .filter((color) => color !== undefined); // Filter out any undefined colors
+    .filter((color) => color !== undefined); 
 
     return (
       <>
         <h1>Theme Creator</h1>
-        
-        {/* Use the new Theme component for theme actions */}
         <Theme
           themes={themes}
           setThemes={setThemes}
@@ -73,8 +71,8 @@ function App() {
           <Color
             key={color.id}
             color={color}
-           onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null} // Disable delete for Default Theme
-           onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null} // Disable edit for Default Theme
+           onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null} 
+           onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
           />
         ))}
       </>

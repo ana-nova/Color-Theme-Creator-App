@@ -24,8 +24,8 @@ export default function CopyToClipboard({ hexCode }) {
 
   return (
     <div>
-      <button onClick={handleCopyClick}>Copy to Clipboard</button>
-      {copied && <p className="confirmation-message">#hex color copied successfully!</p>}
+      <button onClick={handleCopyClick}>copy #hex</button>
+      {copied && <p className="confirmation-message">{hexCode} copied successfully!</p>}
     </div>
   );
 }
