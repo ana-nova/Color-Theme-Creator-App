@@ -1,10 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 //import useLocalStorageState from "use-local-storage-state";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
+  const [edit, setEdit] = useState(false);
+  const [contrastScore, setContrastScore] = useState(null);
+
+
+  useEffect(() => {
+  async function fetchContrastScore() {
+    try {
+      const response = await fetch("https://www.aremycolorsaccessible.com/api/are-they", {
+        mode: 'cors',
+        method: "POST",
+        body: JSON.stringify({ colors: [color.hex, color.contrastText] })
+      });
+
+      const data = await response.json();
+      setContrastScore(data.overall); 
+    } catch (error) {
+      console.error("Error fetching contrast score:", error);
+    }
+  }
+    fetchContrastScore();
+}, [color])
+
   function handleDelete() {
     // Show a confirmation dialog before deleting
     const userConfirmed = window.confirm(
@@ -15,9 +37,6 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       onDeleteColor(color.id); 
     }
   }
-
-  const [edit, setEdit] = useState(false);
-  //const [edit, setEdit] = useLocalStorageState("editMode", false);
 
 
   function handleEdit() {
@@ -41,12 +60,16 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         <ColorForm onSubmitColor={handleUpdateColor} isEditing={edit} initialColor={color}/>
       ) : (
       <>
+        <CopyToClipboard hexCode={color.hex} />
         <h3 className="color-card-headlight">{color.role}</h3>
         <p>hex: {color.hex}</p>
         <p>contrast: {color.contrastText}</p>
+        <p>
+            Accessibility Score:{" "}
+            {contrastScore ? contrastScore : "Loading..."}
+          </p>
         <button onClick={handleDelete}>delete</button>
         <button onClick={handleEdit}>edit</button>
-        <CopyToClipboard hexCode={color.hex} />
       </>
       )}
     </div>
