@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ColorInput from "../ColorInput/ColorInput";
+// import ColorInput from "../ColorInput/ColorInput";
 import { uid } from "uid";
 import "./ColorForm.css";
 import {
@@ -7,6 +7,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  HStack,
   Input,
   VStack,
 } from "@chakra-ui/react";
@@ -39,58 +40,18 @@ export default function ColorForm({
     setContrastText("#ffffff");
   }
 
-  // return (
-  //   <form className="color-form" onSubmit={handleSubmit}>
-  //     <label htmlFor="role">
-  //       Role
-  //       <br />
-  //       <input
-  //         type="text"
-  //         id="role"
-  //         name="role"
-  //         value={role}
-  //         onChange={(event) => setRole(event.target.value)}
-  //       />
-  //     </label>
-
-  //     <label htmlFor="hex">
-  //       Hex
-  //       <br />
-  //       <ColorInput
-  //         id="hex"
-  //         inputValue={hex}
-  //         onChange={setHex}
-  //       />
-  //     </label>
-
-  //     <label htmlFor="contrastText">
-  //       Contrast Text
-  //       <br />
-  //       <ColorInput
-  //         id="contrastText"
-  //         inputValue={contrastText}
-  //         onChange={setContrastText}
-  //       />
-  //     </label>
-
-  //     <button type="submit">{isEditing ? "update your color" : "add your color"}</button>
-  //   </form>
-  // );
-
   return (
     <Box
       p={2}
       borderRadius="md"
       boxShadow="md"
       maxWidth="500px"
-      margin="0 auto"
-      bg={"brown"}
-      width={"100%"}
+      padding="5"
       display="flex"
       alignItems="center"
     >
       <form onSubmit={handleSubmit}>
-        <VStack spacing={4} align="stretch" width="400px">
+        <VStack spacing={4} width="300px">
           <FormControl id="role">
             <FormLabel>Role</FormLabel>
             <Input
@@ -102,21 +63,47 @@ export default function ColorForm({
             />
           </FormControl>
 
+          {/* Hex Input and Color Picker on the same line */}
           <FormControl id="hex">
             <FormLabel>Hex</FormLabel>
-            <ColorInput type="color" inputValue={hex} onChange={setHex} />
+            <HStack spacing={4}>
+              <Input
+                type="text"
+                value={hex}
+                onChange={(event) => setHex(event.target.value)}
+                bg="white"
+                flex="8"
+              />
+              <Input
+                type="color"
+                value={hex}
+                onChange={(event) => setHex(event.target.value)}
+                flex="2"
+              />
+            </HStack>
           </FormControl>
 
+          {/* Contrast Text Input and Color Picker with 80:20 ratio */}
           <FormControl id="contrastText">
             <FormLabel>Contrast Text</FormLabel>
-            <ColorInput
-              type="color"
-              inputValue={contrastText}
-              onChange={setContrastText}
-            />
+            <HStack spacing={4}>
+              <Input
+                type="text"
+                value={contrastText}
+                onChange={(event) => setContrastText(event.target.value)}
+                bg="white"
+                flex="8" // Takes up 80% of the space
+              />
+              <Input
+                type="color"
+                value={contrastText}
+                onChange={(event) => setContrastText(event.target.value)}
+                flex="2" // Takes up 20% of the space
+              />
+            </HStack>
           </FormControl>
 
-          <Button type="submit" colorScheme="teal" width="full">
+          <Button type="submit" colorScheme="pink" width="full">
             {isEditing ? "Update Color" : "Add Color"}
           </Button>
         </VStack>

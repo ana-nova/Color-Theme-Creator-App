@@ -16,3 +16,28 @@
   background: rgb(111, 13, 176);
   color: rgb(255, 255, 255);
 }
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.badge-yup {
+  background-color: green;
+}
+
+.badge-kinda {
+  background-color: orange;
+}
+
+.badge-nope {
+  background-color: red;
+}
+
+.badge-default {
+  background-color: gray;
+}

@@ -6,7 +6,7 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import Color from "./Components/Color/Color";
 import "./App.css";
 import Theme from "./Components/Theme/Theme";
-import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, SimpleGrid, VStack } from "@chakra-ui/react";
 
 function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
@@ -98,14 +98,16 @@ function App() {
         </Box>
       </Flex>
 
-      {colorsToShow.map((color) => (
-        <Color
-          key={color.id}
-          color={color}
-          onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
-          onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
-        />
-      ))}
+      <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} p={4}>
+        {colorsToShow.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
+            onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
+          />
+        ))}
+      </SimpleGrid>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Box, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
 export default function CopyToClipboard({ hexCode }) {
@@ -23,11 +24,15 @@ export default function CopyToClipboard({ hexCode }) {
   }, [copied]);
 
   return (
-    <div>
-      <button onClick={handleCopyClick}>copy #hex</button>
-      {copied && (
-        <p className="confirmation-message">{hexCode} copied successfully!</p>
-      )}
-    </div>
+    <Box position="relative" width="100%">
+      <Box position="absolute" top="8px" right="8px">
+        <Button colorScheme="yellow" size="xs" onClick={handleCopyClick}>
+          copy #hex
+        </Button>
+        {copied && (
+          <p className="confirmation-message">{hexCode} copied successfully!</p>
+        )}
+      </Box>
+    </Box>
   );
 }
