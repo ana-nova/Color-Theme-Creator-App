@@ -1,30 +1,35 @@
 import { useState } from "react";
 
-export default function Theme({ themes, setThemes, selectedThemeId, setSelectedThemeId }) {
+export default function Theme({
+  themes,
+  setThemes,
+  selectedThemeId,
+  setSelectedThemeId,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [themeInput, setThemeInput] = useState("");
 
-  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId); 
+  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId); // Finding the currently selected theme to potentially delete
 
   const handleThemeSelectChange = (event) => {
     setSelectedThemeId(event.target.value);
   };
 
   const handleAddTheme = () => {
-    setIsAdding(true);
-    setThemeInput(""); 
+    setIsAdding(true); // Setting the state to indicate that a new theme is being added
+    setThemeInput(""); // Resetting the theme input field to an empty string
   };
 
   const handleEditTheme = () => {
-    if (selectedThemeId === "t1") return;
+    if (selectedThemeId === "t1") return; // Prevent editing the default theme
     const currentTheme = themes.find((theme) => theme.id === selectedThemeId);
-    setIsEditing(true);
-    setThemeInput(currentTheme.name); 
+    setIsEditing(true); // Setting the state to indicate that a theme is being edited
+    setThemeInput(currentTheme.name); // Setting the theme input field with the current theme's name
   };
 
   const handleInputChange = (event) => {
-    setThemeInput(event.target.value);
+    setThemeInput(event.target.value); // Updating the theme input state with the new value
   };
 
   const handleSaveTheme = () => {
@@ -34,10 +39,11 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
         name: themeInput,
         colors: [],
       };
-      setThemes([...themes, newTheme]);
+      setThemes([...themes, newTheme]); // Adding the new theme to the themes array
       setSelectedThemeId(newTheme.id);
       setIsAdding(false);
     } else if (isEditing) {
+      // If an existing theme is being edited
       setThemes(
         themes.map((theme) =>
           theme.id === selectedThemeId ? { ...theme, name: themeInput } : theme
@@ -54,9 +60,11 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
   };
 
   const handleDeleteTheme = (theme) => {
-    if (selectedThemeId === "t1") return; 
+    if (selectedThemeId === "t1") return; // Prevent deleting the default theme; Writing just return without anything following it means that the function stops executing at that point.
 
-    const confirmed = window.confirm(`Are you sure you want to delete this ${theme.name}?`);
+    const confirmed = window.confirm(
+      `Are you sure you want to delete this ${theme.name}?`
+    );
     if (confirmed) {
       setThemes(themes.filter((theme) => theme.id !== selectedThemeId));
       setSelectedThemeId("t1");
@@ -71,7 +79,9 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
             type="text"
             value={themeInput}
             onChange={handleInputChange}
-            placeholder={isAdding ? "Enter new theme name" : "Edit ccurent theme name"}
+            placeholder={
+              isAdding ? "Enter new theme name" : "Edit ccurent theme name"
+            }
           />
           <button onClick={handleSaveTheme}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
@@ -89,7 +99,10 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
           <button onClick={handleEditTheme} disabled={selectedThemeId === "t1"}>
             edit theme
           </button>
-          <button onClick={() => handleDeleteTheme(themeToDelete)} disabled={selectedThemeId === "t1"}>
+          <button
+            onClick={() => handleDeleteTheme(themeToDelete)}
+            disabled={selectedThemeId === "t1"}
+          >
             delete theme
           </button>
         </>
@@ -97,4 +110,3 @@ export default function Theme({ themes, setThemes, selectedThemeId, setSelectedT
     </div>
   );
 }
-
