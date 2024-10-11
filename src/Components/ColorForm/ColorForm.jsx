@@ -3,9 +3,11 @@ import ColorInput from "../ColorInput/ColorInput";
 import { uid } from "uid";
 import "./ColorForm.css";
 
-export default function ColorForm({ onSubmitColor, isEditing, 
-  initialColor={role: "primary", hex: "#ffffff", contrastText: "#000000"} }) {
-
+export default function ColorForm({
+  onSubmitColor,
+  isEditing,
+  initialColor = { role: "primary", hex: "#ffffff", contrastText: "#000000" },
+}) {
   const [role, setRole] = useState(initialColor.role);
   const [hex, setHex] = useState(initialColor.hex);
   const [contrastText, setContrastText] = useState(initialColor.contrastText);
@@ -19,8 +21,8 @@ export default function ColorForm({ onSubmitColor, isEditing,
       contrastText,
     };
 
-    onSubmitColor(newColor); 
-    resetForm(); 
+    onSubmitColor(newColor);
+    resetForm();
   }
 
   function resetForm() {
@@ -30,41 +32,54 @@ export default function ColorForm({ onSubmitColor, isEditing,
   }
 
   return (
-    <form className="color-form" onSubmit={handleSubmit}>
-      <label htmlFor="role">
-        Role
-        <br />
-        <input
-          type="text"
-          id="role"
-          name="role"
-          value={role}
-          onChange={(event) => setRole(event.target.value)} 
-        />
-      </label>
-  
-      <label htmlFor="hex">
-        Hex
-        <br />
-        <ColorInput
-          id="hex"
-          inputValue={hex}
-          onChange={setHex} 
-        />
-      </label>
+    <form className="form-card" onSubmit={handleSubmit}>
+      <div className="input-container">
+        {/* Role input group */}
+        <div className="input-group">
+          <label htmlFor="role">
+            Role
+            <input
+              className="input-field"
+              type="text"
+              id="role"
+              name="role"
+              value={role}
+              onChange={(event) => setRole(event.target.value)}
+            />
+          </label>
+        </div>
 
-      <label htmlFor="contrastText">
-        Contrast Text
-        <br />
-        <ColorInput
-          id="contrastText"
-          inputValue={contrastText}
-          onChange={setContrastText} 
-        />
-      </label>
+        {/* Hex input and color picker group */}
+        <div className="input-group">
+          <label htmlFor="hex">
+            Hex
+            <ColorInput
+              className="input-field"
+              id="hex"
+              inputValue={hex}
+              onChange={setHex}
+            />
+          </label>
+        </div>
 
-      <button type="submit">{isEditing ? "update your color" : "add your color"}</button>
+        {/* Contrast text input and color picker group */}
+        <div className="input-group">
+          <label htmlFor="contrastText">
+            Contrast Text
+            <ColorInput
+              className="input-field"
+              id="contrastText"
+              inputValue={contrastText}
+              onChange={setContrastText}
+            />
+          </label>
+        </div>
+
+        {/* Add button */}
+        <button className="button" type="submit">
+          {isEditing ? "Update your color" : "Add your color"}
+        </button>
+      </div>
     </form>
   );
 }
-
