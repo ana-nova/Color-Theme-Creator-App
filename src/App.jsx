@@ -32,6 +32,7 @@ function App() {
     setColors((prevColors) =>
       prevColors.filter((color) => color.id !== colorId)
     );
+
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === selectedThemeId
@@ -45,6 +46,7 @@ function App() {
     setColors((prevColors) =>
       prevColors.map((color) => (color.id === colorId ? updatedColor : color))
     );
+
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === selectedThemeId
@@ -76,14 +78,30 @@ function App() {
       />
 
       <ColorForm onSubmitColor={handleAddColor} />
-      {colorsToShow.map((color) => (
-        <Color
-          key={color.id}
-          color={color}
-          onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
-          onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
-        />
-      ))}
+
+      {colorsToShow.length > 0 ? ( // Checking if there are colors to show in the current theme
+        colorsToShow.map(
+          (
+            color // Mapping through the colorsToShow array to render each color
+          ) => (
+            <Color
+              key={color.id} // Unique key for each Color component
+              color={color} // Passing the color object to the Color component
+              onDeleteColor={
+                selectedThemeId !== "t1" ? handleDeleteColor : null
+              } // Passing the delete function if allowed
+              onUpdateColor={
+                selectedThemeId !== "t1" ? handleUpdateColor : null
+              } // Passing the update function if allowed
+            />
+          )
+        )
+      ) : (
+        // If colorsToShow is empty, display a message instead
+        <p className="color-card-highlight">
+          you have no colors in your theme. wanna add some?
+        </p>
+      )}
     </>
   );
 }
