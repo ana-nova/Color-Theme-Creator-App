@@ -74,11 +74,19 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         }}
       >
         {edit ? (
-          <ColorForm
-            onSubmitColor={handleUpdateColor}
-            isEditing={edit}
-            initialColor={color}
-          />
+          <Box
+            borderRadius="lg"
+            overflow="hidden"
+            bg={color.hex}
+            color={color.contrastText}
+            boxShadow="md"
+          >
+            <ColorForm
+              onSubmitColor={handleUpdateColor}
+              isEditing={edit}
+              initialColor={color}
+            />
+          </Box>
         ) : (
           <>
             <CopyToClipboard hexCode={color.hex} />

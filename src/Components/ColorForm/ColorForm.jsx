@@ -49,6 +49,9 @@ export default function ColorForm({
       padding="5"
       display="flex"
       alignItems="center"
+      overflow="hidden" // Match the card overflow behavior
+      flexDirection="column"
+      justifyContent="center"
     >
       <form onSubmit={handleSubmit}>
         <VStack spacing={4} width="300px">

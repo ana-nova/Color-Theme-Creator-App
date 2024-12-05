@@ -100,15 +100,16 @@ function App() {
         </Box>
       </Flex>
 
-      <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} p={4}>
+      <SimpleGrid columns={[1, 2, 3]} spacing={3} p={4}>
         {colorsToShow.length > 0 ? (
           colorsToShow.map((color) => (
-            <Color
-              key={color.id}
-              color={color}
-              onDeleteColor={handleDeleteColor}
-              onUpdateColor={handleUpdateColor}
-            />
+            <Box key={color.id} width="100%" height="100%">
+              <Color
+                color={color}
+                onDeleteColor={handleDeleteColor}
+                onUpdateColor={handleUpdateColor}
+              />
+            </Box>
           ))
         ) : (
           <p className="color-card-highlight">
