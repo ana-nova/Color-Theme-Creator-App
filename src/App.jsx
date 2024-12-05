@@ -17,8 +17,9 @@ function App() {
   const [selectedThemeId, setSelectedThemeId] = useState("t1");
 
   const handleAddColor = (newColor) => {
-    setColors((prevColors) => [newColor, ...prevColors]); // Adding the new color to the beginning of the colors array
-    // Updating the selected theme to include the new color's ID
+
+    setColors((prevColors) => [newColor, ...prevColors]);
+
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === selectedThemeId
@@ -71,6 +72,21 @@ function App() {
     <>
       <h1>Theme Creator</h1>
       <Theme
+        themes={themes}
+        setThemes={setThemes}
+        selectedThemeId={selectedThemeId}
+        setSelectedThemeId={setSelectedThemeId}
+      />
+
+      <ColorForm onSubmitColor={handleAddColor} />
+      {colorsToShow.map((color) => (
+        <Color
+          key={color.id}
+          color={color}
+          onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
+          onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
+        />
+      ))}
         themes={themes} // {/*The themes prop contains the list of all themes available in the application.*/}
         setThemes={setThemes} //  {/*This is a function that allows the Theme component to update the list of themes.*/}
         selectedThemeId={selectedThemeId} // {/*This prop holds the ID of the currently selected theme.*/}
@@ -107,6 +123,7 @@ function App() {
 }
 
 export default App;
+
 
 /*
 Summary of cuntionalities:

@@ -21,7 +21,7 @@ export default function ColorForm({
       contrastText,
     };
 
-    onSubmitColor(newColor); // passing the prop to app.jsx
+    onSubmitColor(newColor);
     resetForm();
   }
 
@@ -32,6 +32,57 @@ export default function ColorForm({
   }
 
   return (
+    <form className="form-card" onSubmit={handleSubmit}>
+      <div className="input-container">
+        {/* Role input group */}
+        <div className="input-group">
+          <label htmlFor="role">
+            Role
+            <input
+              className="input-field"
+              type="text"
+              id="role"
+              name="role"
+              value={role}
+              onChange={(event) => setRole(event.target.value)}
+            />
+          </label>
+        </div>
+
+        {/* Hex input and color picker group */}
+        <div className="input-group">
+          <label htmlFor="hex">
+            Hex
+            <ColorInput
+              className="input-field"
+              id="hex"
+              inputValue={hex}
+              onChange={setHex}
+            />
+          </label>
+        </div>
+
+        {/* Contrast text input and color picker group */}
+        <div className="input-group">
+          <label htmlFor="contrastText">
+            Contrast Text
+            <ColorInput
+              className="input-field"
+              id="contrastText"
+              inputValue={contrastText}
+              onChange={setContrastText}
+            />
+          </label>
+        </div>
+
+        {/* Add button */}
+        <button className="button" type="submit">
+          {isEditing ? "Update your color" : "Add your color"}
+        </button>
+      </div>
+    </form>
+  );
+}
     <form className="color-form" onSubmit={handleSubmit}>
       <label htmlFor="role">
         Role
