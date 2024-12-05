@@ -6,6 +6,7 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import Color from "./Components/Color/Color";
 import "./App.css";
 import Theme from "./Components/Theme/Theme";
+import { Box, Flex, Heading, SimpleGrid, VStack } from "@chakra-ui/react";
 
 function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
@@ -67,6 +68,49 @@ function App() {
 
   return (
     <>
+      <Flex
+        justify="center"
+        align="center"
+        minHeight="50vh"
+        bg="gray.100"
+        p={5}
+      >
+        <Box
+          bg="white"
+          p={5}
+          borderRadius="md"
+          boxShadow="lg"
+          maxWidth="600px"
+          width="100%"
+        >
+          <VStack spacing={6}>
+            <Heading as="h1" size="lg" textAlign="center">
+              Create your color theme 🌈🦄
+            </Heading>
+
+            <Theme
+              themes={themes}
+              setThemes={setThemes}
+              selectedThemeId={selectedThemeId}
+              setSelectedThemeId={setSelectedThemeId}
+            />
+
+            <ColorForm onSubmitColor={handleAddColor} />
+          </VStack>
+        </Box>
+      </Flex>
+
+      <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} p={4}>
+        {colorsToShow.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
+            onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
+          />
+        ))}
+      </SimpleGrid>
+
       <h1>Theme Creator</h1>
       <Theme
         themes={themes}
@@ -100,7 +144,6 @@ function App() {
             color={color}
             onDeleteColor={handleDeleteColor}
             onUpdateColor={handleUpdateColor}
-            isEditable={selectedThemeId !== "t1"}
           />
         ))
       ) : (
@@ -134,3 +177,4 @@ based on the selected theme's ID to prevent modification of the default theme.
 Theme.jsx: This component is responsible for displaying and selecting themes. It receives the themes state, the current 
 selectedThemeId, and functions to modify these values from the App component.
 */
+

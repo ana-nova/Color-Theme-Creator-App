@@ -1,3 +1,4 @@
+import { Button, HStack, Input, Select } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function Theme({
@@ -10,26 +11,26 @@ export default function Theme({
   const [isAdding, setIsAdding] = useState(false);
   const [themeInput, setThemeInput] = useState("");
 
-  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId); // Finding the currently selected theme to potentially delete
+  const themeToDelete = themes.find((theme) => theme.id === selectedThemeId);
 
   const handleThemeSelectChange = (event) => {
     setSelectedThemeId(event.target.value);
   };
 
   const handleAddTheme = () => {
-    setIsAdding(true); // Setting the state to indicate that a new theme is being added
-    setThemeInput(""); // Resetting the theme input field to an empty string
+    setIsAdding(true);
+    setThemeInput("");
   };
 
   const handleEditTheme = () => {
-    if (selectedThemeId === "t1") return; // Prevent editing the default theme
+    if (selectedThemeId === "t1") return; 
     const currentTheme = themes.find((theme) => theme.id === selectedThemeId);
-    setIsEditing(true); // Setting the state to indicate that a theme is being edited
-    setThemeInput(currentTheme.name); // Setting the theme input field with the current theme's name
+    setIsEditing(true);
+    setThemeInput(currentTheme.name);
   };
 
   const handleInputChange = (event) => {
-    setThemeInput(event.target.value); // Updating the theme input state with the new value
+    setThemeInput(event.target.value); 
   };
 
   const handleSaveTheme = () => {
@@ -39,11 +40,10 @@ export default function Theme({
         name: themeInput,
         colors: [],
       };
-      setThemes([...themes, newTheme]); // Adding the new theme to the themes array
+      setThemes([...themes, newTheme]); 
       setSelectedThemeId(newTheme.id);
       setIsAdding(false);
     } else if (isEditing) {
-      // If an existing theme is being edited
       setThemes(
         themes.map((theme) =>
           theme.id === selectedThemeId ? { ...theme, name: themeInput } : theme
@@ -60,7 +60,7 @@ export default function Theme({
   };
 
   const handleDeleteTheme = (theme) => {
-    if (selectedThemeId === "t1") return; // Prevent deleting the default theme; Writing just return without anything following it means that the function stops executing at that point.
+    if (selectedThemeId === "t1") return;
 
     const confirmed = window.confirm(
       `Are you sure you want to delete this ${theme.name}?`
@@ -75,37 +75,67 @@ export default function Theme({
     <div className="theme-actions">
       {isEditing || isAdding ? (
         <>
-          <input
+          <Input
             type="text"
             value={themeInput}
             onChange={handleInputChange}
             placeholder={
-              isAdding ? "Enter new theme name" : "Edit ccurent theme name"
+              isAdding ? "Enter new theme name" : "Edit current theme name"
             }
+            bg="white"
+            borderColor="teal.400"
+            focusBorderColor="teal.600"
+            size="sm"
+            mb={2}
           />
-          <button onClick={handleSaveTheme}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <Button
+            onClick={handleSaveTheme}
+            colorScheme="green"
+            size="sm"
+            mr={2}
+          >
+            Save
+          </Button>
+          <Button onClick={handleCancel} colorScheme="red" size="sm">
+            Cancel
+          </Button>
         </>
       ) : (
-        <>
-          <select value={selectedThemeId} onChange={handleThemeSelectChange}>
+        <HStack spacing={4} align="center">
+          <Select
+            value={selectedThemeId}
+            onChange={handleThemeSelectChange}
+            maxWidth="200px" 
+            bg="white"
+            borderColor="teal.400"
+            focusBorderColor="teal.600"
+          >
             {themes.map((theme) => (
               <option key={theme.id} value={theme.id}>
                 {theme.name}
               </option>
             ))}
-          </select>
-          <button onClick={handleAddTheme}>add theme</button>
-          <button onClick={handleEditTheme} disabled={selectedThemeId === "t1"}>
-            edit theme
-          </button>
-          <button
-            onClick={() => handleDeleteTheme(themeToDelete)}
-            disabled={selectedThemeId === "t1"}
+          </Select>
+          <Button colorScheme="green" padding={"5"} onClick={handleAddTheme}>
+            Add Theme
+          </Button>
+          <Button
+            padding={"5"}
+            colorScheme="blue"
+            onClick={handleEditTheme}
+            isDisabled={selectedThemeId === "t1"}
           >
-            delete theme
-          </button>
-        </>
+            Edit Theme
+          </Button>
+          <Button
+            padding={"5"}
+            colorScheme="red"
+            onClick={() => handleDeleteTheme(themeToDelete)}
+            isDisabled={selectedThemeId === "t1"} 
+          >
+            Delete Theme
+          </Button>
+        </HStack>
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import { Box, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
 export default function CopyToClipboard({ hexCode }) {
@@ -5,7 +6,7 @@ export default function CopyToClipboard({ hexCode }) {
 
   async function handleCopyClick() {
     try {
-      await navigator.clipboard.writeText(hexCode); // Using the Clipboard API to copy the hex code to the clipboard
+      await navigator.clipboard.writeText(hexCode);
       setCopied(true);
     } catch (error) {
       console.error("Failed to copy hex code: ", error);
@@ -15,7 +16,7 @@ export default function CopyToClipboard({ hexCode }) {
   useEffect(() => {
     if (copied) {
       const timer = setTimeout(() => {
-        setCopied(false); // Reset the copied state to false after 3 seconds
+        setCopied(false);
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -23,6 +24,16 @@ export default function CopyToClipboard({ hexCode }) {
   }, [copied]);
 
   return (
+    <Box position="relative" width="100%">
+      <Box position="absolute" top="8px" right="8px">
+        <Button colorScheme="yellow" size="xs" onClick={handleCopyClick}>
+          copy #hex
+        </Button>
+        {copied && (
+          <p className="confirmation-message">{hexCode} copied successfully!</p>
+        )}
+      </Box>
+    </Box>
     <div>
       <button onClick={handleCopyClick}>copy #hex</button>
       {copied && (
