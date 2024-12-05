@@ -6,6 +6,8 @@ This app is your ultimate color playground! Add, edit or delete colors and even 
 
 Built as part of the neue fische bootcamp, this project showcases the skills and technologies I’ve mastered so far.
 
+---
+
 ## What technologies did I use? 🚀
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black) 
