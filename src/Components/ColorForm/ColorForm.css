@@ -1,21 +1,32 @@
-/* Styling the form to display each input on a new line */
-form {
-	gap: 10px;
-	display: flex;
-	margin-bottom: 20px;
-	flex-direction: column;
-	align-items: flex-start;
-  }
-  
-  label {
-    display: flex;
-    flex-direction: column; /* Aligns the label text and input vertically */
-    margin-bottom: 10px; /* Adds some space after each label for better spacing */
-  }
-  
-  input[type="text"],
-  input[type="color"],
-  button {
-    margin-top: 5px; /* Adds a little space between the label and the input */
-  }
-  
+/* Container to keep each group on its own line */
+.input-container {
+  display: flex;
+  flex-direction: column; /* Ensure each group is on its own line */
+  gap: 15px; /* Space between groups */
+}
+
+/* General styles for buttons and input fields */
+.button,
+.input-field {
+  border-radius: 15px; /* Make buttons and inputs round */
+  padding: 10px;
+}
+
+/* Card-like container for grouping dropdown, inputs, and add button */
+.form-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f0f0f0; /* Light background to distinguish the card */
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  gap: 15px; /* Gap between elements within the card */
+  align-items: flex-start;
+}
+
+/* Updated styles for input groups to align elements properly */
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Gap between input fields and color picker */
+}

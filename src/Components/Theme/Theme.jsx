@@ -23,14 +23,14 @@ export default function Theme({
   };
 
   const handleEditTheme = () => {
-    if (selectedThemeId === "t1") return;
+    if (selectedThemeId === "t1") return; 
     const currentTheme = themes.find((theme) => theme.id === selectedThemeId);
     setIsEditing(true);
     setThemeInput(currentTheme.name);
   };
 
   const handleInputChange = (event) => {
-    setThemeInput(event.target.value);
+    setThemeInput(event.target.value); 
   };
 
   const handleSaveTheme = () => {
@@ -40,7 +40,7 @@ export default function Theme({
         name: themeInput,
         colors: [],
       };
-      setThemes([...themes, newTheme]);
+      setThemes([...themes, newTheme]); 
       setSelectedThemeId(newTheme.id);
       setIsAdding(false);
     } else if (isEditing) {
@@ -70,50 +70,6 @@ export default function Theme({
       setSelectedThemeId("t1");
     }
   };
-
-  // return (
-  //   <Menu>
-  // <div className="theme-actions">
-  //   {isEditing || isAdding ? (
-  //     <>
-  //       <input
-  //         type="text"
-  //         value={themeInput}
-  //         onChange={handleInputChange}
-  //         placeholder={
-  //           isAdding ? "Enter new theme name" : "Edit ccurent theme name"
-  //         }
-  //       />
-  //       <button onClick={handleSaveTheme}>Save</button>
-  //       <button onClick={handleCancel}>Cancel</button>
-  //     </>
-  //   ) : (
-  //     <>
-  //       <select value={selectedThemeId} onChange={handleThemeSelectChange}>
-  //         {themes.map((theme) => (
-  //           <option key={theme.id} value={theme.id}>
-  //             {theme.name}
-  //           </option>
-  //         ))}
-  //       </select>
-  //       <button onClick={handleAddTheme}>add theme</button>
-  //       <button
-  //         onClick={handleEditTheme}
-  //         disabled={selectedThemeId === "t1"}
-  //       >
-  //         edit theme
-  //       </button>
-  //       <button
-  //         onClick={() => handleDeleteTheme(themeToDelete)}
-  //         disabled={selectedThemeId === "t1"}
-  //       >
-  //         delete theme
-  //       </button>
-  //     </>
-  //   )}
-  // </div>
-  //   </Menu>
-  // );
 
   return (
     <div className="theme-actions">
@@ -146,11 +102,10 @@ export default function Theme({
         </>
       ) : (
         <HStack spacing={4} align="center">
-          {/* Dropdown for theme selection */}
           <Select
             value={selectedThemeId}
             onChange={handleThemeSelectChange}
-            maxWidth="200px" // Limit the width of the dropdown
+            maxWidth="200px" 
             bg="white"
             borderColor="teal.400"
             focusBorderColor="teal.600"
@@ -161,8 +116,6 @@ export default function Theme({
               </option>
             ))}
           </Select>
-
-          {/* Action buttons for add, edit, and delete */}
           <Button colorScheme="green" padding={"5"} onClick={handleAddTheme}>
             Add Theme
           </Button>
@@ -170,7 +123,7 @@ export default function Theme({
             padding={"5"}
             colorScheme="blue"
             onClick={handleEditTheme}
-            isDisabled={selectedThemeId === "t1"} // Disable if the default theme is selected
+            isDisabled={selectedThemeId === "t1"}
           >
             Edit Theme
           </Button>
@@ -178,7 +131,7 @@ export default function Theme({
             padding={"5"}
             colorScheme="red"
             onClick={() => handleDeleteTheme(themeToDelete)}
-            isDisabled={selectedThemeId === "t1"} // Disable if the default theme is selected
+            isDisabled={selectedThemeId === "t1"} 
           >
             Delete Theme
           </Button>

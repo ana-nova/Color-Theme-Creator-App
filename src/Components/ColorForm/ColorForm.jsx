@@ -24,7 +24,7 @@ export default function ColorForm({
   function handleSubmit(event) {
     event.preventDefault();
     const newColor = {
-      id: uid(),
+      id: initialColor.id || uid(),
       role,
       hex,
       contrastText,
@@ -63,7 +63,6 @@ export default function ColorForm({
             />
           </FormControl>
 
-          {/* Hex Input and Color Picker on the same line */}
           <FormControl id="hex">
             <FormLabel>Hex</FormLabel>
             <HStack spacing={4}>
@@ -83,7 +82,6 @@ export default function ColorForm({
             </HStack>
           </FormControl>
 
-          {/* Contrast Text Input and Color Picker with 80:20 ratio */}
           <FormControl id="contrastText">
             <FormLabel>Contrast Text</FormLabel>
             <HStack spacing={4}>
@@ -92,13 +90,13 @@ export default function ColorForm({
                 value={contrastText}
                 onChange={(event) => setContrastText(event.target.value)}
                 bg="white"
-                flex="8" // Takes up 80% of the space
+                flex="8" 
               />
               <Input
                 type="color"
                 value={contrastText}
                 onChange={(event) => setContrastText(event.target.value)}
-                flex="2" // Takes up 20% of the space
+                flex="2" 
               />
             </HStack>
           </FormControl>
@@ -111,3 +109,68 @@ export default function ColorForm({
     </Box>
   );
 }
+
+    <form className="form-card" onSubmit={handleSubmit}>
+      <div className="input-container">
+        <div className="input-group">
+          <label htmlFor="role">
+            Role
+            <input
+              className="input-field"
+              type="text"
+              id="role"
+              name="role"
+              value={role}
+              onChange={(event) => setRole(event.target.value)}
+            />
+          </label>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="hex">
+            Hex
+            <ColorInput
+              className="input-field"
+              id="hex"
+              inputValue={hex}
+              onChange={setHex}
+            />
+          </label>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="contrastText">
+            Contrast Text
+            <ColorInput
+              className="input-field"
+              id="contrastText"
+              inputValue={contrastText}
+              onChange={setContrastText}
+            />
+          </label>
+        </div>
+
+        <button className="button" type="submit">
+          {isEditing ? "Update your color" : "Add your color"}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+/*
+Summary of functionalities here:
+1. Users can enter the role, hex color, and contrast text.
+2. When the form is submitted, it generates a new color object and passes it to a parent component via the onSubmitColor prop.
+3. After submission, the form fields reset to their default values using the resetForm function.
+4. The form can dynamically change its behavior between "add" and "update" modes based on the isEditing prop.
+
+trivia:
+ColorInput.jsx: The ColorForm uses the ColorInput component for the hex and contrast text fields. 
+The ColorInput component receives two props: inputValue to control the displayed value and onChange to update the state when the value changes.
+
+Parent Component: The form's submission behavior is controlled by the onSubmitColor prop, 
+which is a function passed down from a parent component (App.jsx). 
+This function handles what happens when a new color is added or updated.
+*/
+
