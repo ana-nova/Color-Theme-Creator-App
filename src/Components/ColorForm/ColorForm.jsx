@@ -15,7 +15,7 @@ export default function ColorForm({
   function handleSubmit(event) {
     event.preventDefault();
     const newColor = {
-      id: uid(),
+      id: initialColor.id || uid(),
       role,
       hex,
       contrastText,
@@ -34,7 +34,6 @@ export default function ColorForm({
   return (
     <form className="form-card" onSubmit={handleSubmit}>
       <div className="input-container">
-        {/* Role input group */}
         <div className="input-group">
           <label htmlFor="role">
             Role
@@ -49,7 +48,6 @@ export default function ColorForm({
           </label>
         </div>
 
-        {/* Hex input and color picker group */}
         <div className="input-group">
           <label htmlFor="hex">
             Hex
@@ -62,7 +60,6 @@ export default function ColorForm({
           </label>
         </div>
 
-        {/* Contrast text input and color picker group */}
         <div className="input-group">
           <label htmlFor="contrastText">
             Contrast Text
@@ -75,7 +72,6 @@ export default function ColorForm({
           </label>
         </div>
 
-        {/* Add button */}
         <button className="button" type="submit">
           {isEditing ? "Update your color" : "Add your color"}
         </button>

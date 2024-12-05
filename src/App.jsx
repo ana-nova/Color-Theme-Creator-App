@@ -17,7 +17,6 @@ function App() {
   const [selectedThemeId, setSelectedThemeId] = useState("t1");
 
   const handleAddColor = (newColor) => {
-
     setColors((prevColors) => [newColor, ...prevColors]);
 
     setThemes((prevThemes) =>
@@ -35,11 +34,10 @@ function App() {
     );
 
     setThemes((prevThemes) =>
-      prevThemes.map((theme) =>
-        theme.id === selectedThemeId
-          ? { ...theme, colors: theme.colors.filter((id) => id !== colorId) }
-          : theme
-      )
+      prevThemes.map((theme) => ({
+        ...theme,
+        colors: theme.colors.filter((id) => id !== colorId),
+      }))
     );
   };
 
@@ -62,8 +60,7 @@ function App() {
     );
   };
 
-  const selectedTheme = themes.find((theme) => theme.id === selectedThemeId); // Finding the currently selected theme from the themes array
-  // Getting the colors associated with the selected theme
+  const selectedTheme = themes.find((theme) => theme.id === selectedThemeId);
   const colorsToShow = selectedTheme.colors
     .map((colorId) => colors.find((color) => color.id === colorId))
     .filter((color) => color !== undefined);
@@ -87,33 +84,26 @@ function App() {
           onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
         />
       ))}
-        themes={themes} // {/*The themes prop contains the list of all themes available in the application.*/}
-        setThemes={setThemes} //  {/*This is a function that allows the Theme component to update the list of themes.*/}
-        selectedThemeId={selectedThemeId} // {/*This prop holds the ID of the currently selected theme.*/}
-        setSelectedThemeId={setSelectedThemeId} // {/*This function allows the Theme component to change the currently selected theme.*/}
+      <Theme
+        themes={themes}
+        setThemes={setThemes}
+        selectedThemeId={selectedThemeId}
+        setSelectedThemeId={setSelectedThemeId}
       />
 
       <ColorForm onSubmitColor={handleAddColor} />
 
-      {colorsToShow.length > 0 ? ( // Checking if there are colors to show in the current theme
-        colorsToShow.map(
-          (
-            color // Mapping through the colorsToShow array to render each color
-          ) => (
-            <Color
-              key={color.id} // Unique key for each Color component
-              color={color} // Passing the color object to the Color component
-              onDeleteColor={
-                selectedThemeId !== "t1" ? handleDeleteColor : null
-              } // Passing the delete function if allowed
-              onUpdateColor={
-                selectedThemeId !== "t1" ? handleUpdateColor : null
-              } // Passing the update function if allowed
-            />
-          )
-        )
+      {colorsToShow.length > 0 ? (
+        colorsToShow.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onDeleteColor={handleDeleteColor}
+            onUpdateColor={handleUpdateColor}
+            isEditable={selectedThemeId !== "t1"}
+          />
+        ))
       ) : (
-        // If colorsToShow is empty, display a message instead
         <p className="color-card-highlight">
           you have no colors in your theme. wanna add some?
         </p>
@@ -123,7 +113,6 @@ function App() {
 }
 
 export default App;
-
 
 /*
 Summary of cuntionalities:

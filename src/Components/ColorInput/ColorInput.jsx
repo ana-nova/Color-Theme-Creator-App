@@ -1,7 +1,7 @@
 export default function ColorInput({ id, inputValue, onChange }) {
   function handleInputValue(event) {
-    const newValue = event.target.value; // call the new value from the event object when the input changes
-    onChange(newValue); // update parent component: ColorForm.jsx
+    const newValue = event.target.value;
+    onChange(newValue);
   }
 
   return (
@@ -10,7 +10,7 @@ export default function ColorInput({ id, inputValue, onChange }) {
         type="text"
         id={id}
         name={id}
-        value={inputValue} // Binding the input field's value as prop
+        value={inputValue}
         onChange={handleInputValue}
       />
       <input type="color" value={inputValue} onChange={handleInputValue} />

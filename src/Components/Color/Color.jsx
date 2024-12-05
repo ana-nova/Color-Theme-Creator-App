@@ -8,21 +8,20 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [contrastScore, setContrastScore] = useState(null);
   const [fetchColor, setFetchColor] = useState(null);
 
-  // useEffect hook to perform a side effect when the color prop changes
   useEffect(() => {
     async function fetchContrastScore() {
       try {
         const response = await fetch(
           "https://www.aremycolorsaccessible.com/api/are-they",
           {
-            mode: "cors", // Enabling cross-origin resource sharing (CORS)
-            method: "POST", // HTTP method for sending data to the server
-            body: JSON.stringify({ colors: [color.hex, color.contrastText] }), // Converting color data to JSON format for the request
+            mode: "cors",
+            method: "POST",
+            body: JSON.stringify({ colors: [color.hex, color.contrastText] }),
           }
         );
 
-        const data = await response.json(); // Parsing the response as JSON
-        setContrastScore(data.overall); // Updating the contrast score state with the fetched data
+        const data = await response.json();
+        setContrastScore(data.overall);
 
         if (data.overall === "Yup") {
           setFetchColor("green");
@@ -36,7 +35,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       }
     }
     fetchContrastScore();
-  }, [color]); // Dependency array ensures the effect runs when the color prop changes
+  }, [color]);
 
   function handleDelete() {
     const userConfirmed = window.confirm(
@@ -54,7 +53,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
 
   function handleUpdateColor(updatedColor) {
     onUpdateColor(color.id, updatedColor);
-    setEdit(false); // Exit edit mode
+    setEdit(false);
   }
 
   return (
@@ -67,9 +66,9 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
     >
       {edit ? (
         <ColorForm
-          onSubmitColor={handleUpdateColor} // Passing the handleUpdateColor function to the ColorForm component
-          isEditing={edit} // Passing the edit state to indicate the form is in edit mode
-          initialColor={color} // Passing the current color data as the initial values for the form fields
+          onSubmitColor={handleUpdateColor}
+          isEditing={edit}
+          initialColor={color}
         />
       ) : (
         <>
