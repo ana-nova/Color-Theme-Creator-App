@@ -1,4 +1,4 @@
-# Recap Project 4: Color Theme Creator 🎨
+# Recap Project: Color Theme Creator 🎨
 
 ## What is it about? 👀
 
