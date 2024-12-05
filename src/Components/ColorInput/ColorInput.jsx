@@ -16,18 +16,18 @@ export default function ColorInput({ id, inputValue, onChange }) {
             name={id}
             value={inputValue}
             onChange={handleInputValue}
-            bg="white" // Ensures that the background color is white
-            borderColor="gray.400" // Adds a visible border color
-            focusBorderColor="teal.500" // Border color when the input is focused
+            bg="white"
+            borderColor="gray.400"
+            focusBorderColor="teal.500"
             color="black"
           />
           <Input
             type="color"
             value={inputValue}
             onChange={handleInputValue}
-            bg="white" // Ensures that the background color is white
-            borderColor="gray.400" // Adds a visible border color
-            focusBorderColor="teal.500" // Border color when the input is focused
+            bg="white"
+            borderColor="gray.400"
+            focusBorderColor="teal.500"
             color="black"
           />
         </VStack>

@@ -12,7 +12,6 @@ export default function CopyToClipboard({ hexCode }) {
       console.error("Failed to copy hex code: ", error);
     }
   }
-  // useEffect hook to handle side effects when the 'copied' state changes
   useEffect(() => {
     if (copied) {
       const timer = setTimeout(() => {
@@ -34,12 +33,6 @@ export default function CopyToClipboard({ hexCode }) {
         )}
       </Box>
     </Box>
-    <div>
-      <button onClick={handleCopyClick}>copy #hex</button>
-      {copied && (
-        <p className="confirmation-message">{hexCode} copied successfully!</p>
-      )}
-    </div>
   );
 }
 

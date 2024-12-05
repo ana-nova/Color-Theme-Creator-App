@@ -90,13 +90,13 @@ export default function ColorForm({
                 value={contrastText}
                 onChange={(event) => setContrastText(event.target.value)}
                 bg="white"
-                flex="8" 
+                flex="8"
               />
               <Input
                 type="color"
                 value={contrastText}
                 onChange={(event) => setContrastText(event.target.value)}
-                flex="2" 
+                flex="2"
               />
             </HStack>
           </FormControl>
@@ -107,54 +107,6 @@ export default function ColorForm({
         </VStack>
       </form>
     </Box>
-  );
-}
-
-    <form className="form-card" onSubmit={handleSubmit}>
-      <div className="input-container">
-        <div className="input-group">
-          <label htmlFor="role">
-            Role
-            <input
-              className="input-field"
-              type="text"
-              id="role"
-              name="role"
-              value={role}
-              onChange={(event) => setRole(event.target.value)}
-            />
-          </label>
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="hex">
-            Hex
-            <ColorInput
-              className="input-field"
-              id="hex"
-              inputValue={hex}
-              onChange={setHex}
-            />
-          </label>
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="contrastText">
-            Contrast Text
-            <ColorInput
-              className="input-field"
-              id="contrastText"
-              inputValue={contrastText}
-              onChange={setContrastText}
-            />
-          </label>
-        </div>
-
-        <button className="button" type="submit">
-          {isEditing ? "Update your color" : "Add your color"}
-        </button>
-      </div>
-    </form>
   );
 }
 
@@ -173,4 +125,3 @@ Parent Component: The form's submission behavior is controlled by the onSubmitCo
 which is a function passed down from a parent component (App.jsx). 
 This function handles what happens when a new color is added or updated.
 */
-

@@ -101,56 +101,21 @@ function App() {
       </Flex>
 
       <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} p={4}>
-        {colorsToShow.map((color) => (
-          <Color
-            key={color.id}
-            color={color}
-            onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
-            onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
-          />
-        ))}
+        {colorsToShow.length > 0 ? (
+          colorsToShow.map((color) => (
+            <Color
+              key={color.id}
+              color={color}
+              onDeleteColor={handleDeleteColor}
+              onUpdateColor={handleUpdateColor}
+            />
+          ))
+        ) : (
+          <p className="color-card-highlight">
+            you have no colors in your theme. wanna add some?
+          </p>
+        )}
       </SimpleGrid>
-
-      <h1>Theme Creator</h1>
-      <Theme
-        themes={themes}
-        setThemes={setThemes}
-        selectedThemeId={selectedThemeId}
-        setSelectedThemeId={setSelectedThemeId}
-      />
-
-      <ColorForm onSubmitColor={handleAddColor} />
-      {colorsToShow.map((color) => (
-        <Color
-          key={color.id}
-          color={color}
-          onDeleteColor={selectedThemeId !== "t1" ? handleDeleteColor : null}
-          onUpdateColor={selectedThemeId !== "t1" ? handleUpdateColor : null}
-        />
-      ))}
-      <Theme
-        themes={themes}
-        setThemes={setThemes}
-        selectedThemeId={selectedThemeId}
-        setSelectedThemeId={setSelectedThemeId}
-      />
-
-      <ColorForm onSubmitColor={handleAddColor} />
-
-      {colorsToShow.length > 0 ? (
-        colorsToShow.map((color) => (
-          <Color
-            key={color.id}
-            color={color}
-            onDeleteColor={handleDeleteColor}
-            onUpdateColor={handleUpdateColor}
-          />
-        ))
-      ) : (
-        <p className="color-card-highlight">
-          you have no colors in your theme. wanna add some?
-        </p>
-      )}
     </>
   );
 }
@@ -177,4 +142,3 @@ based on the selected theme's ID to prevent modification of the default theme.
 Theme.jsx: This component is responsible for displaying and selecting themes. It receives the themes state, the current 
 selectedThemeId, and functions to modify these values from the App component.
 */
-

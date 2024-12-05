@@ -8,8 +8,6 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [edit, setEdit] = useState(false);
   const [contrastScore, setContrastScore] = useState(null);
   const [a11yBgColor, setA11yBgColor] = useState(null);
-  const [fetchColor, setFetchColor] = useState(null);
-
 
   useEffect(() => {
     async function fetchContrastScore() {
@@ -32,7 +30,6 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
           setA11yBgColor("orange");
         } else {
           setA11yBgColor("red");
-          
         }
       } catch (error) {
         console.error("Error fetching contrast score:", error);
@@ -62,8 +59,8 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
 
   return (
     <Box
-      borderRadius="lg" // Makes the color card rounded
-      overflow="hidden" // Ensures content stays within the rounded edges
+      borderRadius="lg"
+      overflow="hidden"
       p={4}
       bg={color.hex}
       color={color.contrastText}
@@ -105,29 +102,6 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         )}
       </div>
     </Box>
-  );
-}
-
-      {edit ? (
-        <ColorForm
-          onSubmitColor={handleUpdateColor}
-          isEditing={edit}
-          initialColor={color}
-        />
-      ) : (
-        <>
-          <CopyToClipboard hexCode={color.hex} />
-          <h3 className="color-card-headlight">{color.role}</h3>
-          <p>hex: {color.hex}</p>
-          <p>contrast: {color.contrastText}</p>
-          <p style={{ backgroundColor: fetchColor }}>
-            Accessibility Score: {contrastScore ? contrastScore : "Loading..."}
-          </p>
-          <button onClick={handleDelete}>delete</button>
-          <button onClick={handleEdit}>edit</button>
-        </>
-      )}
-    </div>
   );
 }
 
